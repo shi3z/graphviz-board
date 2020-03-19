@@ -44,6 +44,7 @@ var graphviz = d3.select("#graph").graphviz()
 
 function render() {
 	text = document.getElementById("dot").value;
+	text = text.replace('--','->');
 	text = "digraph  {"+text+"}"
     graphviz
         .renderDot(text)
