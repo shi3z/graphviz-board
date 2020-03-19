@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+<head>
+<title>Graphviz-board</title>
+</head>
 <body>
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="https://unpkg.com/@hpcc-js/wasm@0.3.6/dist/index.min.js"></script>
 <script src="https://unpkg.com/d3-graphviz@3.0.0/build/d3-graphviz.js"></script>
 <textarea style="float:left;" rows=40 id="dot">
 dot -> graphviz
+you--can--write--like--this
 </textarea><br>
 
-<div id="graph" style="float:left;width:800px;height:800px;text-align: center;"></div>
+<div id="graph" style="float:left;width:800px;height:400px;text-align: center;"></div>
+<div style="clear:left;"/>
+Powered by <a href=https://github.com/magjac/d3-graphviz>d3-graphviz</a>. 
+</div>
+
 <script>
 document.onkeydown = function(e) {
     var keyCode = false;
@@ -44,7 +52,7 @@ var graphviz = d3.select("#graph").graphviz()
 
 function render() {
 	text = document.getElementById("dot").value;
-	text = text.replace('--','->');
+	text = text.replace(/--/g,' -> ');
 	text = "digraph  {"+text+"}"
     graphviz
         .renderDot(text)
