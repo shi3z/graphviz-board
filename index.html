@@ -79,7 +79,14 @@ function render() { //雑な実装なのは許せ
 			result+="\n"+RegExp.$2 +" -> "+RegExp.$1+"\n"; 
 			console.log(result);
 		}else{
-			result+="\n"+texts[i];
+			var reObj = new RegExp(/(.+)\+-\+(.+)/);
+			if(reObj.test(texts[i])){
+				result+="\n"+RegExp.$1 +" -> "+RegExp.$2+"\n"; 
+				result+="\n"+RegExp.$2 +" -> "+RegExp.$1+"\n"; 
+				console.log(result);
+			}else{
+				result+="\n"+texts[i];
+			}
 		}
 	}
 	text = result;
