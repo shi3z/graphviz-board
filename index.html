@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="http:////d3js.org/d3.v5.min.js"></script>
+<script src="https://unpkg.com/@hpcc-js/wasm@0.3.6/dist/index.min.js"></script>
+<script src="https://unpkg.com/d3-graphviz@3.0.0/build/d3-graphviz.js"></script>
+<textarea style="float:left;" rows=40 id="dot">
+dot -> graphviz
+</textarea><br>
+
+<div id="graph" style="float:left;width:800px;height:800px;text-align: center;"></div>
+<script>
+document.onkeydown = function(e) {
+    var keyCode = false;
+ 
+    if (e) event = e;
+ 
+    if (event) {
+        if (event.keyCode) {
+            keyCode = event.keyCode;
+        } else if (event.which) {
+            keyCode = event.which;
+        }
+    }
+    if (event.ctrlKey) 
+    	if(keyCode == 83){ // ctrl+s
+    		render();
+    	}
+	if(keyCode ==13){ // enter
+		render();
+	}
+};
+
+var dotIndex = 0;
+var graphviz = d3.select("#graph").graphviz()
+    .transition(function () {
+        return d3.transition("main")
+            .ease(d3.easeLinear)
+            .delay(200)
+            .duration(100);
+    })
+    .logEvents(true)
+    .on("initEnd", render);
+
+function render() {
+	text = document.getElementById("dot").value;
+	text = "digraph  {"+text+"}"
+    graphviz
+        .renderDot(text)
+}
+</script>
