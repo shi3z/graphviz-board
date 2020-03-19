@@ -53,8 +53,23 @@ var graphviz = d3.select("#graph").graphviz()
 function render() {
 	text = document.getElementById("dot").value;
 	text = text.replace(/--/g,' -> ');
+	text = text.replace(/\[img=/g,'\[ shape=box label="" image=');
+    var regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g; // ']))/;
+    imgs = [];
+	var regexp_makeLink = function(all, url, h, href) {
+		console.log(url);
+		imgs[imgs.length]=url;
+    	return url;
+	}
+	console.log(imgs);
+
+	text = text.replace(regexp_url, regexp_makeLink);
+
+	g = graphviz;
 	text = "digraph  {"+text+"}"
-    graphviz
-        .renderDot(text)
+	for(i=0;i<imgs.length;i++){
+	    g = g.addImage(imgs[i],"256px","256px");
+	}
+    g.renderDot(text);
 }
 </script>
