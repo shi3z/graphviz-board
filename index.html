@@ -68,8 +68,21 @@ var graphviz = d3.select("#graph").graphviz()
     .logEvents(true)
     .on("initEnd", render);
 
-function render() {
+function render() { //雑な実装なのは許せ
 	text = document.getElementById("dot").value;
+	texts = text.split('\n');
+	result=""
+	for(i=0;i<texts.length;i++){
+		var reObj = new RegExp(/(.+)\:-\:(.+)/);
+		if(reObj.test(texts[i])){
+			result+="\n"+RegExp.$1 +" -> "+RegExp.$2+"\n"; 
+			result+="\n"+RegExp.$2 +" -> "+RegExp.$1+"\n"; 
+			console.log(result);
+		}else{
+			result+="\n"+texts[i];
+		}
+	}
+	text = result;
 	text = text.replace(/->/g,' -> ');
 	text = text.replace(/-\:/g,' -> ');
 	text = text.replace(/-\+/g,' -> ');
