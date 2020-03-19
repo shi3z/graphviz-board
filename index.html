@@ -12,6 +12,7 @@ textarea:focus {
 outline: none;
 }
 </style>
+<button id="clear">Clear</button>
 <textarea style="float:left;width:150px;" rows=40 id="dot">
 graphviz-:"graphviz-REPL"#REPL
 graphviz-:"d3-graphviz"#JavaScript
@@ -30,6 +31,11 @@ Powered by <a href=https://github.com/magjac/d3-graphviz>d3-graphviz</a>.
 </div>
 
 <script>
+document.getElementById("clear").onclick=function(){
+		text = document.getElementById("dot").value="";
+		render();
+}
+
 document.onkeydown = function(e) {
     var keyCode = false;
  
