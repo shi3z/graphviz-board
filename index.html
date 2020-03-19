@@ -99,6 +99,10 @@ function render() { //雑な実装なのは許せ
 	text = text.replace(/\#(\S+)/gm,' [label="$1"] ');
 	text = text.replace(/^==(\S+)/gm,' {rank=same $1} ');
 	text = text.replace(/\#/gm,' ');
+	text = text.replace(/\!red/gm,'[style="solid,filled",fillcolor="#ff0000"]');
+	text = text.replace(/\!blue/gm,'[style="solid,filled",fillcolor="#0000ff"]');
+	text = text.replace(/\!green/gm,'[style="solid,filled",fillcolor="#00ff00"]');
+	text = text.replace(/\!yellow/gm,'[style="solid,filled",fillcolor="#ffff00"]');
 	text = text.replace(/\%\S+\n/gm,' [label="$&"] ');
 	text = text.replace(/\%/gm,' ');
 	console.log(text);
