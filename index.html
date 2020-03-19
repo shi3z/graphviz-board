@@ -73,7 +73,7 @@ function render() { //雑な実装なのは許せ
 	texts = text.split('\n');
 	result=""
 	for(i=0;i<texts.length;i++){
-		var reObj = new RegExp(/(.+)\:-\:([^#]+)(\#.+)*/);
+		reObj = new RegExp(/(.+)\:-\:([^#]+)(\#.+)*/);
 		if(reObj.test(texts[i])){
 			result+="\n"+RegExp.$1 +" -> "+RegExp.$2;
 			if(RegExp.$3)result+=RegExp.$3;
@@ -81,8 +81,6 @@ function render() { //雑な実装なのは許せ
 			result+=RegExp.$2 +" -> "+RegExp.$1; 
 			if(RegExp.$3)result+=RegExp.$3;
 			result+="\n"; 
-
-			console.log("log"+result);		
 		}else{
 			var reObj = new RegExp(/(.+)\+-\+([^#]+)(\#.+)/);
 			if(reObj.test(texts[i])){
@@ -93,13 +91,15 @@ function render() { //雑な実装なのは許せ
 			}
 		}
 	}
+	
 	text = result;
 	text = text.replace(/->/g,' -> ');
 	text = text.replace(/-\:/g,' -> ');
 	text = text.replace(/-\+/g,' -> ');
-	text = text.replace(/\#\S+$/gm,' [label="$&"] ');
+	text = text.replace(/\#(\S+)/gm,' [label="$1"] ');
+	text = text.replace(/^==(\S+)/gm,' {rank=same $1} ');
 	text = text.replace(/\#/gm,' ');
-	text = text.replace(/\%\S+$/gm,' [label="$&"] ');
+	text = text.replace(/\%\S+\n/gm,' [label="$&"] ');
 	text = text.replace(/\%/gm,' ');
 	console.log(text);
 	text = text.replace(/\[img=/g,'\[ shape=box label="" image=');
