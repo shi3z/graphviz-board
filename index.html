@@ -83,7 +83,7 @@ function render() {
 	g = graphviz;
 	text = "digraph  {"+text+"}"
 	for(i=0;i<imgs.length;i++){
-	    g = g.addImage(imgs[i],"256px","256px");
+	    g = g.addImage(imgs[i],"64px","64px");
 	}
     g.renderDot(text);
 }
