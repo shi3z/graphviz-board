@@ -13,13 +13,13 @@ outline: none;
 }
 </style>
 <textarea style="float:left;width:150px;" rows=40 id="dot">
-graphviz-:"graphviz-REPL"[#REPL]
-graphviz-:"d3-graphviz"[#JavaScript]
+graphviz-:"graphviz-REPL"#REPL
+graphviz-:"d3-graphviz"#JavaScript
 d3[img="https://camo.githubusercontent.com/722a5cc12c7d40231ebeb8ca6facdc8547e2abf7/68747470733a2f2f64336a732e6f72672f6c6f676f2e737667"]
 
 d3-+"d3-graphviz"
-"d3-graphviz"-:"graphviz-board"[#REPL]
-"graphviz-REPL"-:"graphviz-board"[#inspire]
+"d3-graphviz"-:"graphviz-board"#REPL
+"graphviz-REPL"-:"graphviz-board"#inspire
 
 
 </textarea><br>
@@ -67,7 +67,9 @@ function render() {
 	text = text.replace(/->/g,' -> ');
 	text = text.replace(/-\:/g,' -> ');
 	text = text.replace(/-\+/g,' -> ');
-	text = text.replace(/\#/g,' label= ');
+	text = text.replace(/\#\S+$/gm,' [label="$&"] ');
+	text = text.replace(/\#/gm,' ');
+	console.log(text);
 	text = text.replace(/\[img=/g,'\[ shape=box label="" image=');
     var regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g; // ']))/;
     imgs = [];
