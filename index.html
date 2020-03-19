@@ -59,6 +59,7 @@ function render() {
 	text = document.getElementById("dot").value;
 	text = text.replace(/->/g,' -> ');
 	text = text.replace(/-\:/g,' -> ');
+	text = text.replace(/\#/g,' label= ');
 	text = text.replace(/\[img=/g,'\[ shape=box label="" image=');
     var regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g; // ']))/;
     imgs = [];
