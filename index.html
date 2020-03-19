@@ -17,7 +17,7 @@ dot -> graphviz
 you-:can-:write-:like-:this
 </textarea><br>
 
-<div id="graph" style="float:left;width:800px;height:400px;text-align: center;"></div>
+<div id="graph" style="float:left;width:600px;height:400px;text-align: center;"></div>
 <div style="clear:left;"/>
 Powered by <a href=https://github.com/magjac/d3-graphviz>d3-graphviz</a>. 
 </div>
@@ -59,6 +59,7 @@ function render() {
 	text = document.getElementById("dot").value;
 	text = text.replace(/->/g,' -> ');
 	text = text.replace(/-\:/g,' -> ');
+	text = text.replace(/-\+/g,' -> ');
 	text = text.replace(/\#/g,' label= ');
 	text = text.replace(/\[img=/g,'\[ shape=box label="" image=');
     var regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g; // ']))/;
